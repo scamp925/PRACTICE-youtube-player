@@ -61,6 +61,7 @@ const videoBtnModal = () => {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body" id="modal-body">
+          
           <form>
           <div class="form-floating mb-3">
             <input class="form-control form-control-lg" type="text" placeholder="Video ID" id="videoId" aria-label="video id" required>
@@ -97,6 +98,7 @@ const videoBtnModal = () => {
             Submit
           </button>
         </form>
+
           </div>
         </div>
       </div>
@@ -107,7 +109,7 @@ const videoBtnModal = () => {
 
 // Video component with default arg value
 // = 'cNjIUSDnb9k'
-const videoPlayer = (videoId) => {
+const videoPlayer = (videoId = 'cNjIUSDnb9k') => {
   const domString = `
   <iframe src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   `;
@@ -211,14 +213,23 @@ const eventListeners = () => {
   const form = document.querySelector('form');
   form.addEventListener('submit', (e) => {
     e.preventDefault(); // this goes in EVERY form submit to prevent page reload
-    // grab the values from the form inputs and create an object
-    // push that object to the data array    
-    // rerender cards using the cardsOnDom function and pass it the updated data array
     
+    // grab the values from the form inputs and create an object
+    const newVideoObj = {
+      videoId: document.querySelector("#videoId").value,
+      title: document.querySelector("title").value,
+      category: document.querySelector("#category").value,
+      favorite: document.querySelector("#favorite").checked,
+    }
+
+    // push that object to the data array  
+    data.push(newVideoObj);  
+    // rerender cards using the cardsOnDom function and pass it the updated data array
+    cardsOnDom(data);
     
     // Close modal and reset form
-    formModal.hide()
-    form.reset();
+    formModal.hide() //This closes the modal upon hitting the "submit" button - this is a bootstrap thing!
+    form.reset(); //target the form with whatever we named it or by the id. .reset() is a built-in method. Use on forms - just resets all the values on the form
   });
 };
 
