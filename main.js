@@ -217,7 +217,7 @@ const eventListeners = () => {
     // grab the values from the form inputs and create an object
     const newVideoObj = {
       videoId: document.querySelector("#videoId").value,
-      title: document.querySelector("title").value,
+      title: document.querySelector("#title").value,
       category: document.querySelector("#category").value,
       favorite: document.querySelector("#favorite").checked,
     }
